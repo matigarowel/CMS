@@ -1,0 +1,40 @@
+/* You can add global styles to this file, and also import other style files */
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+
+/* Scrollbar Styling */
+::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+  }
+  
+  ::-webkit-scrollbar-track {
+    background-color: inherit;
+    -webkit-border-radius: 10px;
+    border-radius: 10px;
+  }
+  
+  ::-webkit-scrollbar-thumb {
+    -webkit-border-radius: 10px;
+    border-radius: 10px;
+    background: #6d6d6d; 
+  }
+  ::-webkit-scrollbar-corner{
+    background-color: inherit;
+    border-radius: 10px;
+  }
+  .font-size *{
+    // font-size: 18px !important;
+  }
+  .font-size-x-md *{
+    // font-size: 12px !important;
+  }
+  .font-size-x-xs *{
+    // font-size: 10px !important;
+  }
+ .mat-paginator-range-label{
+   margin: 0px !important;
+ }
+

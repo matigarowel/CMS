@@ -1,0 +1,65 @@
+<div class="grid-container">
+  <mat-grid-list cols="4" rowHeight="300px">
+    
+    <mat-grid-tile [colspan]="4" [rowspan]="1">
+      <mat-card class="dashboard-card" style="overflow: auto;">
+        <app-pins
+        [viewType]="'card'">
+      </app-pins>
+      </mat-card>
+    </mat-grid-tile>
+
+    <mat-grid-tile [colspan]="ismobile? 4: 3" [rowspan]="1">
+      <mat-card class="dashboard-card">
+        <app-charts 
+          [chartHieght]="chartHieght"
+          [chartData]="chartData"
+          [chartLabels]="chartLabels"
+          [chartOptions]="chartOptions"
+          [chartColors]="chartColors"
+          [chartLegend]="chartLegend"
+          [chartType]="'line'"
+          [chartPlugins]="chartPlugins">
+        </app-charts>
+      </mat-card>
+    </mat-grid-tile>
+    
+    <mat-grid-tile [colspan]="ismobile? 4: 1" [rowspan]="1">
+      <mat-card class="dashboard-card">
+        <app-charts 
+          [chartHieght]="pieHieght"
+          [chartData1]="pieChartData"
+          [chartLabels]="pieChartLabels"
+          [chartOptions]="pieChartOptions"
+          [chartColors]="pieChartColors"
+          [chartLegend]="pieChartLegend"
+          [chartType]="'doughnut'"
+          [chartPlugins]="pieChartPlugins">
+        </app-charts>
+      </mat-card>
+    </mat-grid-tile>
+
+    <mat-grid-tile [colspan]="ismobile? 4: 2" [rowspan]="1">
+      <mat-card class="dashboard-card" style="overflow: auto;">
+        <app-table
+        [tableOptions]="false"
+        [tableDataSource]="pinsDataSource"
+        [tableName]="'pin'"
+        (rowID)="rowID($event)"
+        ></app-table>
+      </mat-card>
+    </mat-grid-tile>
+
+    <mat-grid-tile [colspan]="ismobile? 4: 2" [rowspan]="1">
+      <mat-card class="dashboard-card" style="overflow: auto;">
+        <app-table
+        [tableOptions]="false"
+        [tableDataSource]="usersDataSource"
+        [tableName]="'user'"
+        (rowID)="rowID($event)"
+        ></app-table>
+      </mat-card>
+    </mat-grid-tile>
+
+  </mat-grid-list>
+</div>

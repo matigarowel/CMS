@@ -1,0 +1,26 @@
+// .button-row {
+//     display: table-cell;
+//     width: 490px;
+//   }
+  
+//   .button-row .mat-button-base {
+//     margin: 8px 8px 8px 0;
+//   }
+
+//   .mat-grid-tile .mat-figure {
+//     justify-content: flex-start !important;
+//     align-items: flex-start !important;
+//  }
+
+::ng-deep.mat-form-field-disabled .mat-form-field-outline{ 
+  background:rgba(150, 150, 150, 0.2) !important;
+} 
+
+::ng-deep.mat-form-field-disabled { 
+  cursor: not-allowed !important;
+} 
+
+::ng-deep.mat-slide-toggle.mat-disabled .mat-slide-toggle-label{
+  cursor: not-allowed !important;
+}
+

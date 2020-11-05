@@ -1,0 +1,21 @@
+::ng-deep.mat-dialog-container{
+    padding: 5px 5px 5px 5px !important;
+}
+// ::ng-deep.mat-tab-body-content{
+//     overflow: hidden !important;
+//     // min-height: 1000px;
+//     // display: flex;
+//     // flex: 1 1 0%
+//     border: 5px solid rgb(58, 15, 214);
+// }
+// .mat-tab-group.mat-tab-fill-height .mat-tab-body-wrapper {
+//     flex: 1 1 100%;
+//  }
+
+::ng-deep.mat-tab-body-wrapper {
+    height: 100% !important;
+}
+
+.mat-dialog-content {
+    max-height: none !important;
+}

@@ -1,0 +1,9 @@
+<div style="margin: 10px">
+    <app-table
+    [tableOptions]="true"
+    [tableDataSource]="usersDataSource"
+    [tableName]="'user'"
+    (rowID)="rowID($event)"
+    >
+</app-table>
+</div>

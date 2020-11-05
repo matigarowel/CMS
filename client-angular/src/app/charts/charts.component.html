@@ -1,0 +1,30 @@
+<div class="chartjs-container">
+    <canvas baseChart 
+        [attr.Height] = "chartHieght"
+        [datasets]="chartData" 
+        [data]="chartData1"
+        [labels]="chartLabels" 
+        [options]="chartOptions"
+        [colors]="chartColors" 
+        [legend]="chartLegend" 
+        [chartType]="chartType" 
+        [plugins]="chartPlugins"
+        (chartHover)="chartHovered($event)" 
+        (chartClick)="chartClicked($event)">
+    </canvas>
+</div>
+
+
+
+<!-- <div class="chartjs-container">
+    <canvas 
+        baseChart 
+        [data]="pieChartData" 
+        [labels]="pieChartLabels" 
+        [chartType]="pieChartType"
+        [options]="pieChartOptions" 
+        [plugins]="pieChartPlugins" 
+        [colors]="pieChartColors" 
+        [legend]="pieChartLegend">
+    </canvas>
+</div> -->

@@ -1,0 +1,137 @@
+<div style="height: 100vh;" fxFlex [ngClass]="{'font-size': true}" [ngClass.x-md]="{'font-size-x-md': true}" [ngClass.x-xs]="{'font-size-x-xs': true}">
+  <div fxLayout="column" fxFlex>
+    <div fxFlex="7" fxFlex.x-lg="9" fxFlex.xs="12">
+      <mat-toolbar color="primary" class="mat-elevation-z8" fxFill style="font-size: inherit;">
+        <div fxFlex="50" fxLayoutAlign="start center">
+          <mat-icon (click)="sidenav.toggle()" fxShow.sm="true" fxShow.gt-sm="false">menu</mat-icon>
+          LOGO HERE
+        </div>
+        <div fxFlex="50" fxLayoutAlign="end center">
+          <button mat-button (click)="loginButton()">
+            <mat-icon>perm_identity</mat-icon>
+            <span class="ml-2">Log in</span>
+          </button>
+      
+          <button mat-icon-button [matMenuTriggerFor]="menu" fxShow.lt-md="true" fxShow.gt-sm="false" *ngIf="">
+            <mat-icon>account_circle</mat-icon>
+          </button>
+          <mat-menu #menu="matMenu" overlapTrigger="false">
+            <button mat-menu-item>
+              <mat-icon>account_circle</mat-icon>
+              <span>My Account</span>
+            </button>
+            <button mat-menu-item>
+              <mat-icon>exit_to_app</mat-icon>
+              <span>Logout</span>
+            </button>
+          </mat-menu>
+        </div>
+      </mat-toolbar>
+    </div>
+    <div fxFlex>
+      <mat-sidenav-container fxFlex>
+        <mat-sidenav #sidenav [mode]="mode" [opened]="!ismobile">
+          <mat-icon (click)="sidenav.toggle()" style="float: right;">arrow_left</mat-icon>
+          <div class="my-2" fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="10px">
+            <div style="padding: 10px;">
+              LOGO HERE
+              <h1>Online Apps</h1>
+            </div>
+          </div>
+          <div class="mt-3">
+            <mat-accordion multi="true" [displayMode]="displayMode">
+              <mat-expansion-panel class="no-shadow" expanded>
+                <mat-expansion-panel-header fxLayout="row" [expandedHeight]="expandHeight"
+                  [collapsedHeight]="collapseHeight">
+                  <mat-panel-title>
+                    TEST
+                  </mat-panel-title>
+                </mat-expansion-panel-header>
+                <mat-nav-list class="ml-0" dense>
+                  <mat-list-item [routerLink]="['/timesheet/timecard']" >
+                    <button mat-icon-button class="mr-3" routerLinkActive="mat-accent">
+                      <mat-icon>book_online</mat-icon>
+                    </button>
+                    <a>TEST</a>
+                  </mat-list-item>
+                </mat-nav-list>
+              </mat-expansion-panel>
+              <mat-expansion-panel class="no-shadow" expanded>
+                <mat-expansion-panel-header fxLayout="row" [expandedHeight]="expandHeight"
+                  [collapsedHeight]="collapseHeight">
+                  <mat-panel-title>
+                    TEST
+                  </mat-panel-title>
+                </mat-expansion-panel-header>
+                <mat-nav-list class="ml-0" dense>
+                  <mat-list-item [routerLink]="['/overtime/myovertime']" >
+                    <button mat-icon-button class="mr-3" routerLinkActive="mat-accent">
+                      <mat-icon>schedule</mat-icon>
+                    </button>
+                    <a>My TEST</a>
+                  </mat-list-item>
+                  <mat-list-item>
+                    <button mat-icon-button class="mr-3">
+                      <mat-icon>history_toggle_off</mat-icon>
+                    </button>
+                    <a>My TEST</a>
+                  </mat-list-item>
+                  <mat-list-item>
+                    <button mat-icon-button class="mr-3">
+                      <mat-icon>check_circle</mat-icon>
+                    </button>
+                    <a>For TEST</a>
+                  </mat-list-item>
+                  <mat-list-item>
+                    <button mat-icon-button class="mr-3">
+                      <mat-icon>history</mat-icon>
+                    </button>
+                    <a>TEST History</a>
+                  </mat-list-item>
+                </mat-nav-list>
+              </mat-expansion-panel>
+              <mat-expansion-panel class="no-shadow my-0" expanded>
+                <mat-expansion-panel-header fxLayout="row" [expandedHeight]="expandHeight"
+                  [collapsedHeight]="collapseHeight">
+                  <mat-panel-title>
+                    TEST
+                  </mat-panel-title>
+                </mat-expansion-panel-header>
+                <mat-nav-list class="ml-0" dense>
+                  <mat-list-item [routerLink]="['/leave/myleave']" >
+                    <button mat-icon-button class="mr-3" routerLinkActive="mat-accent">
+                      <mat-icon>date_range</mat-icon>
+                    </button>
+                    <a>My TEST</a>
+                  </mat-list-item>
+                  <mat-list-item>
+                    <button mat-icon-button class="mr-3">
+                      <mat-icon>wysiwyg</mat-icon>
+                    </button>
+                    <a>My TEST</a>
+                  </mat-list-item>
+                  <mat-list-item>
+                    <button mat-icon-button class="mr-3">
+                      <mat-icon>check_circle</mat-icon>
+                    </button>
+                    <a>For TEST</a>
+                  </mat-list-item>
+                  <mat-list-item>
+                    <button mat-icon-button class="mr-3">
+                      <mat-icon>history</mat-icon>
+                    </button>
+                    <a>TEST History</a>
+                  </mat-list-item>
+                </mat-nav-list>
+              </mat-expansion-panel>
+            </mat-accordion>
+          </div>
+        </mat-sidenav>
+        <mat-sidenav-content fxFlex style="position: absolute;left: 0;right: 0;overflow: hidden;">
+          <router-outlet></router-outlet>
+        </mat-sidenav-content>
+    
+      </mat-sidenav-container>
+    </div>
+  </div>
+</div>

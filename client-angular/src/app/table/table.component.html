@@ -1,0 +1,98 @@
+<div fxLayout="column" fxFill fxLayoutGap="10px">
+  <div *ngIf="tableConctrolButtons" fxLayout="row" fxLayout.xs="column" fxLayout.x-lg="column" fxLayoutGap="10px" fxFlex="10" fxFlex.xs="18" fxFlex.x-xl="18" fxFlex.x-lg="18">
+    <div fxLayout="row" fxLayoutGap="10px" fxFlex="50">
+      <div fxLayoutAlign="start center" fxLayoutAlign.xs="space-between center"  *ngFor="let tableConctrolButton of tableConctrolButtons; let index = index;">
+        <button mat-raised-button fxFlex
+          [color]="tableConctrolButton.color" 
+          (click)="broadcastEvent(tableConctrolButton.event)"
+          [disabled]="!hasSelected && tableConctrolButton.sensitive">
+          <mat-icon>{{tableConctrolButton.icon}}</mat-icon>
+          {{tableConctrolButton.name}}
+        </button>
+      </div>
+    </div>
+    <div *ngIf="pageFilter" fxLayoutAlign="end center" fxLayoutGap="10px" fxFlex="50">
+      <mat-form-field fxFlex>
+        <mat-label>Filter</mat-label>
+        <input matInput (keyup)="applyFilter($event)" type="text" autocomplete="off"
+          placeholder="Please input value based on the table below">
+      </mat-form-field>
+    </div>
+  </div>
+
+  <div fxFlex style="overflow: auto;">
+    <form [formGroup]="formGroup" autocomplete="off">
+      <mat-table matSort [dataSource]="formArray.controls" style="cursor: pointer;width: 2000px;">
+        <ng-container [matColumnDef]="column.field" *ngFor="let column of tableDataSource[0].data; let index = index;">
+          <mat-header-cell  *matHeaderCellDef mat-sort-header fxFlex="{{column.prop.width}}" style="padding: 0px;">{{column.prop.label}}</mat-header-cell>
+          <mat-cell *matCellDef="let element" [formGroup]="element" fxFlex="{{column.prop.width}}" style="padding: 0px;">
+            <div [ngSwitch]="column.prop.element" fxFlex fxLayoutAlign="start center">
+              <div *ngSwitchCase="'badge'">
+                <span matBadgeColor="warn" matBadge="{{column.prop.value}}"></span>
+              </div>
+              <div *ngSwitchCase="'button'" fxFlex>
+                <button mat-raised-button fxFlex color="primary">{{column.prop.value}}</button>
+              </div>
+              <div *ngSwitchCase="'checkbox'" fxFlex>
+    
+              </div>
+              <div *ngSwitchCase="'select'" fxFlex>
+                <mat-form-field fxFlex>
+                    <mat-select formControlName="{{column.field}}"
+                        [ngClass]="{'pointer': column.prop.primary || column.prop.disabled}">
+                        <mat-option [disabled]="column.prop.primary || column.prop.disabled" value="{{opt}}"
+                            *ngFor="let opt of column.prop.value.items">{{opt}}
+                        </mat-option>
+                    </mat-select>
+                    <mat-error matErrorMessages></mat-error>
+                </mat-form-field>
+              </div>
+              <div *ngSwitchCase="'toggle'" fxFlex>
+                <mat-slide-toggle fxFlex>
+                  {{column.prop.label}}
+                </mat-slide-toggle>
+              </div>
+              <div *ngSwitchCase="'textbox'" fxFlex>
+                <mat-form-field fxFlex>
+                  <input #input matInput type="text" formControlName="{{column.field}}">
+                  <mat-hint align="end">{{input.value.length || 0}} / 256</mat-hint>
+                  <mat-error matErrorMessages></mat-error>
+                </mat-form-field>
+              </div>
+              <div *ngSwitchCase="'date'" fxFlex>
+                <mat-form-field fxFlex>
+                    <input matInput formControlName="{{column.field}}" [matDatepicker]="dp">
+                    <mat-datepicker-toggle matSuffix [for]="dp"></mat-datepicker-toggle>
+                    <mat-datepicker #dp>
+                    </mat-datepicker>
+                    <mat-error matErrorMessages></mat-error>
+                </mat-form-field>
+            </div>
+            <div *ngSwitchDefault fxFlex>
+              {{column.prop.value}}
+            </div>
+            </div>
+          </mat-cell>
+        </ng-container>
+    
+        <mat-header-row *matHeaderRowDef="tableDataRow; sticky: true"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: tableDataRow;" (click)="selection.toggle(row);selectedRow(row)"
+          [ngClass]="{hovered: row.hovered, highlighted: selection.isSelected(row)}" (mouseover)="row.hovered = true"
+          (mouseout)="row.hovered = false">
+        </mat-row>
+    
+        <mat-row *matNoDataRow>
+          <td colspan="100">No data matching the filter "{{filterValue}}"</td>
+        </mat-row>
+      </mat-table>
+    </form>
+  </div>
+
+
+  <div *ngIf="pageSize" fxFlex="10">
+    <mat-paginator [pageSizeOptions]="pageSizeOptions" fxFlex fxLayout="row" fxLayoutAlign="end start"></mat-paginator>  
+  </div>
+</div>
+
+
+

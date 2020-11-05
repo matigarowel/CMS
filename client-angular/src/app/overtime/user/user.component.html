@@ -1,0 +1,10 @@
+<div fxLayout="column" fxFill style="padding: 5px;">
+    <mat-card class="mat-elevation-z8" fxFlex>
+        <app-table
+            [pageFilter]="true" 
+            [tableDataSource]="tableDataSource" 
+            [tableName]="'overtime'"
+            [tableConctrolButtons]="tableConctrolButtons">
+        </app-table>
+    </mat-card>
+</div>

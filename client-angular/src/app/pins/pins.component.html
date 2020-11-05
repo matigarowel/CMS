@@ -1,0 +1,60 @@
+<div [ngSwitch]="viewType">
+  <div *ngSwitchCase="'card'">
+    <div fxLayoutAlign="center  center" fxLayout="row wrap" style="padding: 0px; width: 100%">
+      <div fxFlex="25%" fxFlex.xs="100%" fxFlex.sm="33%" *ngFor="let dataSources of pinsDataSource; let index = index;" style="padding: 10px !important;">
+        <mat-card class="card" style="background: #3f51b5;">
+          <!-- <mat-card-content>
+            <h2>PIN #: {{pinmodel.pin_no}} </h2>
+            <p>
+              {{pinmodel.name}}
+            </p>
+          </mat-card-content>
+          <mat-card-actions>
+            <button mat-mini-fab color="{{pinmodel.live? 'primary' : 'warn'}}">
+              <mat-icon>{{pinmodel.live? 'power' : 'power_off'}}</mat-icon>
+            </button>
+          </mat-card-actions> -->
+          <div *ngFor="let element of dataSources.data; let index = index;">
+            <div [ngSwitch]="element.prop.type">
+              <div *ngSwitchCase="'badge'">
+                {{element.prop.label}}: {{element.prop.value}}
+              </div>
+              <div *ngSwitchCase="'checkbox'">
+                {{element.prop.label}}:
+              </div>
+              <div *ngSwitchCase="'toggle'">
+                {{element.prop.label}}:
+                <mat-slide-toggle color="primary" [(ngModel)]="element.prop.value" disabled>
+                </mat-slide-toggle>
+              </div>
+              <div *ngSwitchCase="'live'">
+                <button mat-mini-fab color="{{element.prop.value ? 'warn': 'accent'}}" (click)="onClick(dataSources.data)">
+                  <mat-icon >{{element.prop.value ? 'power' : 'power_off'}}</mat-icon>
+                </button>
+                
+              </div>
+              <div *ngSwitchCase="'textbox'">
+                {{element.prop.label}}: {{element.prop.value}}
+              </div>
+              <div *ngSwitchDefault>
+                {{element.prop.label}}: {{element.prop.value}}
+              </div>
+            </div>
+          </div>
+        </mat-card>
+      </div>
+    </div>
+  </div>
+  
+  <div *ngSwitchCase="'table'">
+    <div style="margin: 10px">
+      <app-table 
+      [tableOptions]="true" 
+      [tableDataSource]="pinsDataSource" 
+      [tableName]="'pin'"
+      (rowID)="rowID($event)">
+      </app-table>
+    </div>
+  </div>
+</div>
+

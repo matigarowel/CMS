@@ -1,0 +1,66 @@
+<div mat-dialog-title style="margin: 0px !important;">&nbsp;{{formTittle}}</div>
+<mat-dialog-content style="margin: 0px !important;padding: 0px !important;padding: 5px;">
+    <div fxLayout="column" fxFill>
+        <!-- HEADER -->
+        <div fxFlex="50">
+            <app-form #{{formName}}
+                [formTemplate]="formTemplate"
+                [formName]="formName">
+            </app-form>
+        </div>
+        <!-- DETAILS -->
+        <mat-divider></mat-divider>
+        <div fxFlex="50">
+            <mat-tab-group backgroundColor="primary" animationDuration="0ms">
+                <mat-tab *ngFor="let tab of tabTemplate; let i = index;" fxFill>
+                    <ng-template mat-tab-label>
+                        <mat-icon>{{tab.icon}}</mat-icon>&nbsp;{{tab.name.toUpperCase()}}&nbsp;
+                        <!-- <mat-icon *ngIf="this[tab.group].invalid" color="warn">error</mat-icon> -->
+                    </ng-template>
+                    <div fxLayout="column" fxFill fxLayoutGap="5px">
+                        <div *ngIf="tab.buttons"  fxFlex="11">
+                            <div fxLayout="row" fxLayoutAlign="end  center" fxLayoutGap="10px" fxFlex>
+                                <button mat-raised-button style="background:rgba(150, 150, 150, 0.2) ;" *ngFor="let button of tab.buttons; let index = index;"
+                                    [color]="button.color" (click)="broadcastEvent(button.event, tab.group);">
+                                    <mat-icon>{{button.icon}}</mat-icon>
+                                    {{button.name}}
+                                </button>
+                            </div>
+                        </div>
+                        <div *ngIf="tab.form" fxFlex>
+                            <app-form #{{tab.group}}
+                                [formTemplate]="tab.form"
+                                [formName]="tab.group">
+                            </app-form>
+                        </div>
+                        <!-- <mat-divider></mat-divider> -->
+                        <div *ngIf="tab.table" fxFlex>
+                            <app-table #{{tab.group}}
+                                [pageFilter]="false"
+                                [pageSize]="false"
+                                [tableDataSource]="tab.table" 
+                                [tableName]="tab.group">
+                            </app-table>
+                        </div>
+                    </div>
+                    </mat-tab>
+            </mat-tab-group>
+        </div>
+    </div>
+</mat-dialog-content>
+<!-- CONTROLS -->
+<mat-dialog-actions style="padding: 5px;">
+    <div fxLayoutAlign="start  start" fxLayoutGap="10px" fxFlex>
+        <button mat-raised-button *ngFor="let formConctrolButton of formConctrolButtons; let index = index;"
+            [color]="formConctrolButton.color" (click)="broadcastEvent(formConctrolButton.event);">
+            <mat-icon>{{formConctrolButton.icon}}</mat-icon>
+            {{formConctrolButton.name}}
+        </button>
+    </div>
+    <div fxLayoutAlign="end start" fxLayoutGap="10px" fxFlex>
+        <button mat-raised-button color="warn" mat-dialog-close="" color="warn">
+            <mat-icon>cancel</mat-icon>
+            Close
+        </button>
+    </div>
+</mat-dialog-actions>

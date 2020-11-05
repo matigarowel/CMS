@@ -1,0 +1,81 @@
+<form [formGroup]="formGroup" style="width: 100%;" autocomplete="off">
+    <div fxLayout="row wrap" fxLayoutAlign="space-between center">
+        <div *ngFor="let header of formTemplate; let index = index;" fxFlex="{{header.prop.width}}">
+            <div [ngSwitch]="header.prop.element" style="padding: 5px;">
+                <div *ngSwitchCase="'password'">
+                    <mat-form-field style="width: 100%;">
+                        <mat-label>{{header.prop.label}}</mat-label>
+                        <input matInput placeholder="{{header.prop.label}}" [type]="password? 'text' : 'password'"
+                            formControlName="{{header.field}}">
+                        <mat-icon matSuffix (click)="password = !password">{{password ? 'visibility' : 'visibility_off'}}</mat-icon>
+                        <mat-error matErrorMessages></mat-error>
+                    </mat-form-field>
+                </div>
+                <div *ngSwitchCase="'repassword'">
+                    <mat-form-field style="width: 100%;">
+                        <mat-label>{{header.prop.label}}</mat-label>
+                        <input matInput placeholder="{{header.prop.label}}"
+                            [type]="repassword ? 'text' : 'password'" formControlName="{{header.field}}">
+                        <mat-icon matSuffix (click)="repassword = !repassword">{{repassword? 'visibility' : 'visibility_off'}}</mat-icon>
+                        <mat-error matErrorMessages></mat-error>
+                    </mat-form-field>
+                </div>
+                <div *ngSwitchCase="'number'">
+                    <mat-form-field style="width: 100%;">
+                        <mat-label>{{header.prop.label}}</mat-label>
+                        <input matInput type="number" placeholder="{{header.prop.label}}" formControlName="{{header.field}}" onkeyup="">
+                        <mat-error matErrorMessages></mat-error>
+                    </mat-form-field>
+                </div>
+                <div *ngSwitchCase="'select'">
+                    <mat-form-field style="width: 100%;">
+                        <mat-label>{{header.prop.label}}</mat-label>
+                        <mat-select formControlName="{{header.field}}"
+                            [ngClass]="{'pointer': header.prop.primary || header.prop.disabled}">
+                            <mat-option [disabled]="header.prop.primary || header.prop.disabled" value="{{opt}}"
+                                *ngFor="let opt of header.prop.value.items">{{opt}}
+                            </mat-option>
+                        </mat-select>
+                        <mat-error matErrorMessages></mat-error>
+                    </mat-form-field>
+                </div>
+                <div *ngSwitchCase="'toggle'">
+                    <mat-slide-toggle fxFlexAlign="strech" style="margin-bottom: 10px;"
+                        formControlName="{{header.field}}" style="width: 100%;">
+                        {{header.prop.label}}
+                    </mat-slide-toggle>
+                </div>
+                <div *ngSwitchCase="'date'">
+                    <mat-form-field style="width: 100%;">
+                        <mat-label>{{header.prop.label}}</mat-label>
+                        <input formControlName="{{header.field}}" matInput [matDatepicker]="dp">
+                        <mat-datepicker-toggle matSuffix [for]="dp"></mat-datepicker-toggle>
+                        <mat-datepicker #dp>
+                        </mat-datepicker>
+                        <mat-error matErrorMessages></mat-error>
+                    </mat-form-field>
+                </div>
+                <div *ngSwitchDefault>
+                    <mat-form-field style="width: 100%;">
+                        <mat-label>{{header.prop.label}}</mat-label>
+                        <input #input matInput type="text" placeholder="{{header.prop.label}}"
+                            formControlName="{{header.field}}">
+                        <mat-hint align="end">{{input.value.length || 0}} / 256</mat-hint>
+                        <mat-error matErrorMessages></mat-error>
+                    </mat-form-field>
+                </div>
+            </div>
+            <!-- <div
+                *ngIf="f[header.field].invalid && (f[header.field].dirty || f[header.field].touched || f[header.field].untouched && isSubmmited)">
+                <mat-error *ngIf="f[header.field].errors.required">{{header.prop.label}} is required!
+                </mat-error>
+                <mat-error *ngIf="f[header.field].errors.minlength">{{header.prop.label}} must be at least
+                    {{header.prop.validator?.minLength}} characters long!</mat-error>
+                <mat-error *ngIf="f[header.field].errors?.mismatch">Password and Confirm password not match!
+                </mat-error>
+                <mat-error *ngIf="f[header.field].errors.pattern">{{header.prop.label}} is invalid!
+                </mat-error>
+            </div> -->
+        </div>
+    </div>
+</form>

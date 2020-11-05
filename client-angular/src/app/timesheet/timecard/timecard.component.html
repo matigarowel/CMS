@@ -1,0 +1,25 @@
+<div fxLayout="column" fxFill fxLayoutGap="5px" style="padding: 5px;" >
+    <mat-card class="mat-elevation-z8" fxFlex="7" fxFlex.xs="13">
+        <div fxLayout="row wrap" fxLayoutAlign="end center" fxLayoutGap="15px">
+            <div>Loaded: Today</div>
+            <mat-form-field>
+                <mat-label>Timecard Period</mat-label>
+                <mat-select>
+                    <mat-option *ngFor="let option of options" [value]="option.value">
+                        {{option.viewValue}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+    </mat-card>
+    
+    <mat-card class="mat-elevation-z8" fxFlex>
+        <app-table 
+        [tableDataSource]="timecardDataSource" 
+        [pageSizeOptions]="pageSizeOptions"
+        [pageSize]="false"
+        [pageFilter]="false"
+        [tableName]="'timeshhet'" 
+        ></app-table>
+    </mat-card>
+</div>
